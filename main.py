@@ -1,11 +1,13 @@
 import argparse
 
 from grabber import extract_speech_to_mp3
+from textractor import speech_to_text
 
 
-def main(path,file, output):
+def main(path, file, output):
     mp3_file = extract_speech_to_mp3(path, file, output)
-    print(f"Processing file: {mp3_file}")
+    tsed_text = speech_to_text(mp3_file, path, output)
+    print("Successfully extracted text from the audio file")
 
 
 if __name__ == "__main__":
