@@ -19,6 +19,8 @@ def translate_fbm2m100(ts_text,src_lang,tgt_lang):
 
 
     for item in ts_text:
+        # if a sentence is too long and not separated with comma, then lines should be joined
+        # till the sentence is complete, but this is not important yet
         text = item["line"]
         inputs = tokenizer(text, return_tensors="pt", padding=True).to(device)
         with torch.no_grad():
