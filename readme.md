@@ -15,7 +15,6 @@ pip install -r requirements.txt
 * Pip
 * FFmpeg
 
-
 ## Usage
 
 ### Run the application
@@ -36,3 +35,4 @@ from [here](https://pytorch.org/get-started/previous-versions/).
 pip uninstall torch torchvision torchaudio -y
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 ```
+
