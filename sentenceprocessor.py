@@ -45,7 +45,11 @@ def determine_line_timestamps(text, word_timestamps):
         start_ts = format_timestamp(start_time)
         end_ts = format_timestamp(end_time)
 
-        result.append((line, start_ts, end_ts))
+        result.append({
+            "line": line,
+            "start_time": start_ts,
+            "end_time": end_ts
+        })
 
         word_index = last_word_index + 1
 

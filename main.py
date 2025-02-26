@@ -2,13 +2,15 @@ import argparse
 
 from grabber import extract_speech_to_mp3
 from sentenceprocessor import make_timestamped_sentences
+from subtitle import create_subtitle
 from textractor import speech_to_text
 
 
 def main(path, file, output):
     mp3_file = extract_speech_to_mp3(path, file, output)
-    ts_words= speech_to_text(mp3_file, path, output)
+    ts_words = speech_to_text(mp3_file, path, output)
     ts_sentences = make_timestamped_sentences(ts_words)
+    create_subtitle(path, f'{output}_orig', ts_sentences)
     print("Successfully extracted text from the audio file")
 
 
