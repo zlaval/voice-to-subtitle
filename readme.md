@@ -22,6 +22,11 @@ Multiple outputs will be saved. Extension is not required.
 ```bash
 python main.py -f test.mkv -p ./testdata -o subtitle
 ```
+### Translate the subtitle:
+```bash
+python main.py -f test.mkv -p ./testdata -o subtitle -s hu -t en
+```
+
 
 ## Troubleshooting
 
