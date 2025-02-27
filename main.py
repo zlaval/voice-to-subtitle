@@ -4,7 +4,7 @@ from grabber import extract_speech_to_mp3
 from sentenceprocessor import make_timestamped_sentences
 from subtitle import create_subtitle
 from textractor import speech_to_text
-from translator import translate_fbm2m100
+from translator import translate_fbm2m100, translate_gpt
 
 
 def main(path, file, output, src, tgt, model="m2m100"):
@@ -14,10 +14,13 @@ def main(path, file, output, src, tgt, model="m2m100"):
     create_subtitle(path, f'{output}_orig', ts_sentences)
     if src and tgt:
         if model == "ChatGPT":
-            print("Translation with ChatGPT does not implemented yet")
+            print("Using ChatGPT")
+            ts_translated=translate_gpt(ts_sentences, src, tgt)
         else:
+            print("Using Facebook m2m100")
             ts_translated=translate_fbm2m100(ts_sentences, src, tgt)
-            create_subtitle(path, f'{output}_{tgt}', ts_translated)
+
+        create_subtitle(path, f'{output}_{tgt}', ts_translated)
 
     print("Successfully extracted text from the audio file")
 
