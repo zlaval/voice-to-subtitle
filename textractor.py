@@ -34,6 +34,9 @@ def speech_to_text(mp3_file, path, output):
     )
 
     result = pipe(mp3_file)
+    #sometimes tokenization_whisper.py throws error: TypeError: '<=' not supported between instances of 'NoneType' and 'float'
+    #update the file locally according to this pr: https://github.com/huggingface/transformers/pull/33625/files
+    #then install it from local repo using `pip install /path/to/transformers`
     text = textwrap.fill(result["text"], width=120)
     writefile(text, path, f"{output}_original_transcription", "txt")
 
