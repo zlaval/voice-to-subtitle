@@ -4,10 +4,13 @@ from datetime import timedelta
 
 MAX_ROW_LEN = 100
 
+def make_timestamped_sentences(ts_words, fine_grained=True):
+    if fine_grained:
+        text = wrap_text(ts_words["text"])
+        return determine_line_timestamps(text, ts_words["chunks"])
+    else:
+        return generate_sentence(ts_words["chunks"])
 
-def make_timestamped_sentences(ts_words):
-    text = wrap_text(ts_words["text"])
-    return determine_line_timestamps(text, ts_words["chunks"])
 
 
 def determine_line_timestamps(text, word_timestamps):
@@ -66,6 +69,18 @@ def format_timestamp(seconds: float) -> str:
     except:
         return "00:00:00,000"
 
+def generate_sentence(subtitles: list) -> str:
+    result = []
+    for i, entry in enumerate(subtitles, start=1):
+        start_time = format_timestamp(entry["timestamp"][0])
+        end_time = format_timestamp(entry["timestamp"][1])
+        result.append({
+            "line": entry['text'],
+            "start_time": start_time,
+            "end_time": end_time
+        })
+
+    return result
 
 def wrap_text(text, width=MAX_ROW_LEN):
     sentences = re.split(r'(?<=[.!?])\s+', text)

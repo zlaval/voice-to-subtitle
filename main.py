@@ -8,9 +8,10 @@ from translator import translate_fbm2m100, translate_gpt
 
 
 def main(path, file, output, src, tgt, model="m2m100"):
+    fine_grained=True
     mp3_file = extract_speech_to_mp3(path, file, output)
-    ts_words = speech_to_text(mp3_file, path, output)
-    ts_sentences = make_timestamped_sentences(ts_words)
+    ts_words = speech_to_text(mp3_file, path, output,fine_grained)
+    ts_sentences = make_timestamped_sentences(ts_words,fine_grained)
     create_subtitle(path, f'{output}_orig', ts_sentences)
     if src and tgt:
         if model == "ChatGPT":
